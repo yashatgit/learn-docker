@@ -1,13 +1,13 @@
 FROM alpine
 
-# https://docs.docker.com/engine/reference/builder/#workdir
+# set directory
 WORKDIR /home
 
-# https://docs.docker.com/engine/reference/builder/#workdir
+# copy code
 ADD ./isPrime.sh .
 
-# https://docs.docker.com/engine/reference/builder/#workdir
+# make it executable
 RUN chmod +x ./isPrime.sh
 
-# https://docs.docker.com/engine/reference/builder/#workdir
+# run
 CMD ["sh", "isPrime.sh"]
