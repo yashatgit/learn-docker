@@ -14,9 +14,17 @@ app.get("/", (req, res) => {
 
 app.get("/isPrime", (req, res) => {
   const { number } = req.query;
-  res.send(`${number} is ${isPrime(number) ? "Prime" : "not Prime"}`);
+  if (!number) {
+    res.send(`Please enter a number in query params. Eg /isPrime?number=8`);
+  } else {
+    res.send(`${number} is ${isPrime(number) ? "Prime" : "not Prime"}`);
+  }
 });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+});
+
+process.on("SIGINT", function () {
+  process.exit();
 });
