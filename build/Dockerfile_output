@@ -1,0 +1,14 @@
+FROM alpine as BUILD
+
+WORKDIR /home
+ADD ./isPrime.sh .
+RUN chmod +x ./isPrime.sh
+RUN echo "Hello Docker" >message.txt
+
+FROM scratch as EXPORT
+COPY --from=BUILD /home/message.txt ./
+
+FROM alpine
+WORKDIR /home
+COPY --from=BUILD /home/isPrime.sh .
+CMD ["sh", "isPrime.sh"]
